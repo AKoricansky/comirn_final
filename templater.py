@@ -1,4 +1,4 @@
-
+#!/usr/bin/env python3
 
 import argparse
 import io
@@ -101,10 +101,11 @@ def main(argv):
                 elif (loaded_dict_values[0] == '-'):
                     variables[last_list_key].append(loaded_dict_values[1])
 
-    # Load added variables
-    for var in config.added_variables:
-        key, value = var.strip().split("=")
-        variables[key] = value
+    # Load added variables if any exist
+    if config.added_variables:
+        for var in config.added_variables:
+            key, value = var.strip().split("=")
+            variables[key] = value
 
     # Use \n even on Windows
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, newline='\n')
